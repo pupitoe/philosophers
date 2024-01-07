@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/08 00:01:44 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/08 00:10:22 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # define PARS_FAIL -1
 # include <stdio.h>
 # include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <pthread.h>
 
 typedef struct s_philo
 {
