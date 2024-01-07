@@ -1,0 +1,5 @@
+**/*.o
+**/philo
+**/*.swap
+.vscode
+fr.subject.pdf
