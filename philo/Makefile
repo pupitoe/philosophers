@@ -1,0 +1,26 @@
+SOURCES = 	main.c \
+			ft_exemple.c \
+			ft_parser.c
+
+OBJS = $(SOURCES:.c=.o)
+HEADER = philo.h
+
+NAME = philo
+
+CFLAGS = -Wall -Wextra -Werror -g3
+CC = cc
+
+all: $(NAME)
+
+$(NAME): $(OBJS) $(HEADER)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+clean:
+	rm -rf $(OBJS)
+
+fclean: clean
+	rm -rf $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
