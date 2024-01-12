@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:23 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/12 21:37:00 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/12 21:38:48 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	ft_philo(t_philo *philo)
 	philos = malloc(philo->philos * sizeof(pthread_t));
 	if (philos == NULL)
 		return (MALLOC_FAIL);
+	free(philos);
 	return (0);
 }
 
