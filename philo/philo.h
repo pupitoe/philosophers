@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/15 14:44:34 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:28:22 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ typedef struct s_philo
 	pthread_t		*thread;
 	t_philo_brain	*brain;
 	int				*forks;
+	pthread_mutex_t	*mutex;
 }				t_philo;
+
 void	ft_print_exemple(void);
 int		ft_parser(int argc, char **argv, t_philo *philo);
 int		ft_philo(t_philo *philo);
