@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/12 21:30:09 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:44:34 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,29 @@
 # include <pthread.h>
 # define MALLOC_FAIL -12
 
+typedef struct s_philo_brain
+{
+	int				*fork_left;
+	int				*fork_right;
+	pthread_mutex_t	*mutex_left;
+	pthread_mutex_t	*mutex_right;
+	size_t			time_left;
+}				t_philo_brain;
+
 typedef struct s_philo
 {
-	int	philos;
-	int	death;
-	int	eat;
-	int	sleep;
-	int	count_int;
+	int				philos;
+	int				death;
+	int				eat;
+	int				sleep;
+	int				count_int;
+	pthread_t		*thread;
+	t_philo_brain	*brain;
+	int				*forks;
 }				t_philo;
-
 void	ft_print_exemple(void);
 int		ft_parser(int argc, char **argv, t_philo *philo);
+int		ft_philo(t_philo *philo);
+void	ft_free_philo(t_philo *philos);
 
 #endif
