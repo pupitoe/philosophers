@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/15 22:16:54 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:10:48 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/time.h>
 # include <pthread.h>
 # define MALLOC_FAIL -12
+# define ERR_THREAD_FAIL -1
+# define ERR_JOIN_FAIL -1
 
 typedef struct s_philo_brain
 {
@@ -44,10 +46,17 @@ typedef struct s_philo
 	pthread_mutex_t	*mutex;
 }				t_philo;
 
+typedef struct s_arg_routine
+{
+	int		pos;
+	t_philo	*philo;
+}				t_arg_routine;
+
 void	ft_print_exemple(void);
 int		ft_parser(int argc, char **argv, t_philo *philo);
 int		ft_philo(t_philo *philo);
 void	ft_free_philo(t_philo *philos);
 int		ft_make_philo(t_philo *philo);
+void	*ft_routine(void *arg);
 
 #endif
