@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:56:55 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/15 15:56:15 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/15 22:32:24 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	ft_make_mutex(t_philo *philo)
 	return (0);
 }
 
-int	ft_philo(t_philo *philo)
+static int	ft_make_thread(t_philo *philo)
 {
 	pthread_t		*philo_th;
 
@@ -79,6 +79,13 @@ int	ft_philo(t_philo *philo)
 	if (philo_th == NULL)
 		return (MALLOC_FAIL);
 	philo->thread = philo_th;
+	return (0);
+}
+
+int	ft_make_philo(t_philo *philo)
+{
+	if (ft_make_thread(philo) == MALLOC_FAIL)
+		return (MALLOC_FAIL);
 	if (ft_make_brain(philo) == MALLOC_FAIL)
 		return (MALLOC_FAIL);
 	if (ft_make_mutex(philo) == MALLOC_FAIL)

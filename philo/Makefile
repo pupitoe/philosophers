@@ -2,6 +2,7 @@ SOURCES = 	main.c \
 			ft_exemple.c \
 			ft_parser.c \
 			ft_make.c \
+			ft_philo.c \
 			ft_free_philo.c
 
 OBJS = $(SOURCES:.c=.o)
