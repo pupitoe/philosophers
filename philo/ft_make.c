@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:56:55 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/15 22:32:24 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:28:53 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	ft_make_fork(t_philo_brain *philo_content, t_philo *philo)
 		philo_content[i].fork_right = forks + i;
 		i++;
 	}
+	if (philo->philos == 1)
+		philo_content[0].fork_left = NULL;
 	philo->forks = forks;
 	return (0);
 }
@@ -40,6 +42,7 @@ static int	ft_make_brain(t_philo *philo)
 	t_philo_brain	*philo_content;
 
 	philo_content = malloc((philo->philos) * sizeof(t_philo_brain));
+	memset(philo_content, 0, (philo->philos) * sizeof(t_philo_brain));
 	if (philo_content == NULL)
 		return (MALLOC_FAIL);
 	if (ft_make_fork(philo_content, philo) == MALLOC_FAIL)
@@ -67,6 +70,8 @@ static int	ft_make_mutex(t_philo *philo)
 		philo->brain[i].mutex_right = mutexs + i;
 		i++;
 	}
+	if (philo->philos == 1)
+		philo->brain[i].mutex_left = NULL;
 	philo->mutex = mutexs;
 	return (0);
 }

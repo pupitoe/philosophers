@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/16 17:15:50 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:50:00 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	ft_join_thread(t_philo *philo)
 	{
 		if (pthread_join(philo->thread[i], NULL) != 0)
 			return (ERR_JOIN_FAIL);
+		printf("End of philo\n");
 		i++;
 	}
 	return (0);

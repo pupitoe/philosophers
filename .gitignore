@@ -2,3 +2,4 @@
 **/*.swap
 .vscode
 fr.subject.pdf
+.log

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 23:24:23 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/15 14:44:56 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:06:29 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ int	ft_parser(int argc, char **argv, t_philo *philo)
 	philo->death = ft_atoi(argv[2]);
 	philo->eat = ft_atoi(argv[3]);
 	philo->sleep = ft_atoi(argv[4]);
-	philo->count_int = -2;
+	philo->count_eat = -2;
 	if (argc == 6)
-		philo->count_int = ft_atoi(argv[5]);
+		philo->count_eat = ft_atoi(argv[5]);
 	if (philo->philos == -1
 		|| philo->death == -1
 		|| philo->eat == -1
 		|| philo->sleep == -1
-		|| philo->count_int == -1)
+		|| philo->count_eat == -1)
 		return (PARS_FAIL);
 	if (philo->philos > 1000)
 	{

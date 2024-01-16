@@ -4,4 +4,4 @@
     valgrind --tool=helgrind ./programme.
     valgrind --tool=drd ./programme.
 
-this branch was create to test philo
+pas oublier que les philosoph commence a 1
