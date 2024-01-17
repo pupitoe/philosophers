@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/16 22:29:11 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/17 23:18:40 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ typedef struct s_philo
 
 typedef struct s_arg_routine
 {
-	int		pos;
-	t_philo	*philo;
+	int				pos;
+	t_philo_brain	*brain;
+	t_philo			*philo;
 }				t_arg_routine;
 
 void	ft_print_exemple(void);
