@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/18 21:20:22 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/18 21:51:39 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define ERR_THREAD_FAIL -1
 # define ERR_JOIN_FAIL -1
 # define PHILO_DETH 69
+# define PHILO_LIFE 24
 # define ROUND_REST 42
 
 typedef struct s_philo_brain
