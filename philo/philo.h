@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/17 23:18:40 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/18 21:20:22 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_philo_brain
 	pthread_mutex_t	*mutex_left;
 	pthread_mutex_t	*mutex_right;
 	size_t			time_left;
-	int 			count_eat;
+	int				count_eat;
 }				t_philo_brain;
 
 typedef struct s_philo
@@ -56,11 +56,18 @@ typedef struct s_arg_routine
 	t_philo			*philo;
 }				t_arg_routine;
 
+void	ft_free_philo(t_philo *philos);
 void	ft_print_exemple(void);
+void	*ft_routine(void *arg);
+
 int		ft_parser(int argc, char **argv, t_philo *philo);
 int		ft_philo(t_philo *philo);
-void	ft_free_philo(t_philo *philos);
 int		ft_make_philo(t_philo *philo);
-void	*ft_routine(void *arg);
+int		ft_print_info(t_arg_routine arg, char *prompt);
+int		ft_prompt_take_fork(t_arg_routine arg);
+int		ft_prompt_eat(t_arg_routine arg);
+int		ft_prompt_sleep(t_arg_routine arg);
+int		ft_prompt_think(t_arg_routine arg);
+int		ft_prompt_death(t_arg_routine arg);
 
 #endif

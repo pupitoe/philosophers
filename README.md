@@ -10,3 +10,7 @@ faire arriver les philose en deux temps,
     premier : les paire
     deuxieme : les impere
     ca permet deviter que seul le premier prend les fourchet et que les qutre attende comme des debile car il n'ont pas leurs fourchette
+
+multiplier par 1000 les useep
+
+pas oublier des gerer si printf retourn -1 ou si gettimeofday retourn -1

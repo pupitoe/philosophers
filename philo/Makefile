@@ -4,7 +4,8 @@ SOURCES = 	main.c \
 			ft_make.c \
 			ft_philo.c \
 			ft_routine.c \
-			ft_free_philo.c
+			ft_free_philo.c \
+			ft_prompt.c
 
 OBJS = $(SOURCES:.c=.o)
 HEADER = philo.h
