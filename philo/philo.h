@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/19 16:29:30 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/19 23:06:27 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@ int		ft_prompt_eat(t_arg_routine arg);
 int		ft_prompt_sleep(t_arg_routine arg);
 int		ft_prompt_think(t_arg_routine arg);
 int		ft_prompt_death(t_arg_routine arg);
+
+int	ft_death_philo(t_philo *philo);
 
 #endif

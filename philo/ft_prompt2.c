@@ -6,13 +6,13 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:15:31 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/19 16:30:41 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/19 23:30:04 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	ft_death_philo(t_philo *philo)
+int	ft_death_philo(t_philo *philo)
 {
 	int	buffer;
 
@@ -20,8 +20,9 @@ static int	ft_death_philo(t_philo *philo)
 	pthread_mutex_lock(&philo->mutex_dead);
 	if (philo->philo_has_dead)
 		buffer = PHILO_DETH;
+	printf("philo dead : %d\n", philo->philo_has_dead);
 	pthread_mutex_unlock(&philo->mutex_dead);
-	return (PHILO_DETH);
+	return (buffer);
 }
 
 int	ft_print_info(t_arg_routine arg, char *prompt)
