@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:26:48 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/15 15:48:40 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:31:08 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_free_philo(t_philo *philos)
 		free(philos->forks);
 	if (philos->mutex)
 	{
+		pthread_mutex_destroy(&philos->mutex_dead);
 		ft_delet_mutex(philos);
 		free(philos->mutex);
 	}

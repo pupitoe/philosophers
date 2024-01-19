@@ -6,20 +6,15 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:20:42 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/18 21:20:46 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:13:47 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_print_info(t_arg_routine arg, char *prompt)
+int	ft_prompt_death(t_arg_routine arg)
 {
-	struct timeval	tv;
-	size_t			buffer;
-
-	gettimeofday(&tv, NULL);
-	buffer = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	printf("%zu %d %s\n", buffer, arg.pos, prompt);
+	ft_print_info(arg, "died");
 	return (0);
 }
 

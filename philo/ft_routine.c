@@ -6,17 +6,36 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:16:55 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/18 22:07:51 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:38:55 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+size_t	ft_get_timestamp(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+void	ft_change_time(t_arg_routine arg, size_t *buffer_time)
+{
+	arg.brain->time_left -= ft_get_timestamp() - *buffer_time;
+	*buffer_time = ft_get_timestamp();
+}
+
 static int	ft_take_fork(t_arg_routine arg)
 {
+	size_t	buffer_time;
+
+	buffer_time = ft_get_timestamp();
 	pthread_mutex_lock(arg.brain->mutex_right);
+	ft_change_time(arg, &buffer_time);
 	ft_prompt_take_fork(arg);
 	pthread_mutex_lock(arg.brain->mutex_left);
+	ft_change_time(arg, &buffer_time);
 	ft_prompt_take_fork(arg);
 	*(arg.brain->fork_left) = 0;
 	*(arg.brain->fork_right) = 1;
@@ -43,7 +62,6 @@ void	*ft_routine(void *arg_v)
 	t_arg_routine	arg;
 	int				buffer;
 
-	(void)ft_take_fork;
 	arg = *(t_arg_routine *)arg_v;
 	buffer = 0;
 	while (buffer != PHILO_DETH && buffer != ROUND_REST)
