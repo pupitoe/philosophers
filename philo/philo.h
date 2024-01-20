@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/20 14:55:53 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:18:44 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,12 @@ int		ft_prompt_eat(t_arg_routine arg);
 int		ft_prompt_sleep(t_arg_routine arg);
 int		ft_prompt_think(t_arg_routine arg);
 int		ft_prompt_death(t_arg_routine arg);
+size_t	ft_get_timestamp(void);
 
+// to find out if someone has died
 int		ft_death_philo(t_philo *philo);
+
+// to set the death
+void	ft_philo_death(t_arg_routine arg);
 
 #endif

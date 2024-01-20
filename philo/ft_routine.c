@@ -6,24 +6,17 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 23:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/20 14:50:03 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:27:57 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-size_t	ft_get_timestamp(void)
+void	ft_change_time(t_arg_routine arg)
 {
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
-}
-
-void	ft_change_time(t_arg_routine arg, size_t *buffer_time)
-{
-	arg.brain->time_left -= ft_get_timestamp() - *buffer_time;
-	*buffer_time = ft_get_timestamp();
+	pthread_mutex_lock(&arg.philo->mutex_dead);
+	arg.brain->time_left = ft_get_timestamp();
+	pthread_mutex_unlock(&arg.philo->mutex_dead);
 }
 
 void	ft_philo_death(t_arg_routine arg)
@@ -34,34 +27,50 @@ void	ft_philo_death(t_arg_routine arg)
 	pthread_mutex_unlock(&arg.philo->mutex_dead);
 }
 
+
+// the expected time is 10 ms per turn or 10000 microseconds 
+// here I only put 9900 microseconds because there are 100 microseconds 
+// of waiting to have the inforomaton of the death of a philo
+int	ft_tea_time(t_arg_routine arg, size_t time)
+{
+	while (time > 10000)
+	{
+		usleep(9900);
+		if (ft_death_philo(arg.philo) == PHILO_DETH)
+			return (PHILO_DETH);
+		time -= 10000;
+	}
+	if (time > 100)
+		usleep(time - 100);
+	return (ft_death_philo(arg.philo));
+}
+
 static int	ft_take_fork(t_arg_routine arg)
 {
-	size_t	buffer_time;
+	int	buffer;
 
-	buffer_time = ft_get_timestamp();
+	buffer = PHILO_LIFE;
 	pthread_mutex_lock(arg.brain->mutex_right);
-	ft_change_time(arg, &buffer_time);
 	ft_prompt_take_fork(arg);
 	pthread_mutex_lock(arg.brain->mutex_left);
-	ft_change_time(arg, &buffer_time);
 	ft_prompt_take_fork(arg);
 	*(arg.brain->fork_left) = 1;
 	*(arg.brain->fork_right) = 1;
 	ft_prompt_eat(arg);
-	arg.brain->time_left = arg.philo->death;
 	usleep(arg.philo->eat * 1000);
+	//ft_tea_time(arg, srg.philo->eat * 1000);
 	*(arg.brain->fork_left) = 0;
 	*(arg.brain->fork_right) = 0;
 	pthread_mutex_unlock(arg.brain->mutex_left);
 	pthread_mutex_unlock(arg.brain->mutex_right);
-	return (PHILO_LIFE);
+	ft_change_time(arg);
+	return (buffer);
 }
 
 static int	ft_philo_eat(t_arg_routine arg)
 {
 	ft_prompt_sleep(arg);
 	usleep(arg.philo->sleep * 1000);
-	arg.brain->time_left -= arg.philo->sleep;
 	return (PHILO_LIFE);
 }
 
@@ -74,6 +83,7 @@ void	*ft_routine(void *arg_v)
 	arg = *(t_arg_routine *)arg_v;
 	buffer = PHILO_LIFE;
 	round = 0;
+	arg.brain->time_left = ft_get_timestamp();
 	while (buffer == PHILO_LIFE)
 	{
 		round++;
@@ -82,11 +92,6 @@ void	*ft_routine(void *arg_v)
 		if (buffer == PHILO_LIFE)
 			buffer = ft_philo_eat(arg);
 		buffer = ft_death_philo(arg.philo);
-		if (arg.pos == 69 && round == 10)
-		{
-			ft_philo_death(arg);
-			buffer = PHILO_DETH;
-		}
 	}
 	return (arg_v);
 }

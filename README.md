@@ -14,3 +14,4 @@ faire arriver les philose en deux temps,
 multiplier par 1000 les useep
 
 pas oublier des gerer si printf retourn -1 ou si gettimeofday retourn -1
+bug des fois les philo se vole les fourchettes au demarage

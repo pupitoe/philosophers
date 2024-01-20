@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/20 14:06:48 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:44:20 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	ft_make_thread(t_philo *philo, t_arg_routine *arg)
 				return (ERR_THREAD_FAIL);
 			printf("th push %d\n", i + 2);
 		}
+		usleep(100);
 		i = i + 1 + (i % 2) * 2;
 	}
 	return (0);
@@ -73,6 +74,30 @@ static int	ft_make_arg(t_arg_routine **arg, t_philo *philo)
 	return (0);
 }
 
+void	ft_check_death(t_philo *philo, t_arg_routine *arg)
+{
+	int	i;
+	int	buffer;
+	size_t	time_temps;
+
+	i = 0;
+	buffer = PHILO_LIFE;
+	while (buffer != PHILO_DETH)
+	{
+		time_temps = ft_get_timestamp();
+		//if (arg[i].brain->time_left < time_temps && arg[i].brain->time_left - time_temps <= (size_t)philo->death)
+		if (arg[i].brain->time_left + philo->death < time_temps)
+		{
+			ft_philo_death(*(arg + i));
+			buffer = PHILO_DETH;
+		}
+		if (i == 0)
+			buffer = ft_death_philo(philo);
+		i = (i + 1) % philo->philos;
+	}
+		
+}
+
 int	ft_philo(t_philo *philo)
 {
 	t_arg_routine	*arg;
@@ -83,6 +108,7 @@ int	ft_philo(t_philo *philo)
 		return (MALLOC_FAIL);
 	if (ft_make_thread(philo, arg) == ERR_THREAD_FAIL)
 		return (free(arg), ERR_THREAD_FAIL);
+	//ft_check_death(philo, arg); // <- datarace + fonctoionne pas bien ou le rest jsp;
 	if (ft_join_thread(philo) == ERR_JOIN_FAIL)
 		return (free(arg), ERR_JOIN_FAIL);
 	free(arg);

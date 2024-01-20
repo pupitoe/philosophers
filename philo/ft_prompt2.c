@@ -6,11 +6,19 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:15:31 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/20 14:55:24 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/20 21:34:53 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+size_t	ft_get_timestamp(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
 
 int	ft_death_philo(t_philo *philo)
 {
@@ -21,20 +29,14 @@ int	ft_death_philo(t_philo *philo)
 	usleep(100);
 	if (philo->philo_has_died)
 		buffer = PHILO_DETH;
-	//printf("philo dead : %d\n", philo->philo_has_died);
 	pthread_mutex_unlock(&philo->mutex_dead);
 	return (buffer);
 }
 
 int	ft_print_info(t_arg_routine arg, char *prompt)
 {
-	struct timeval	tv;
-	size_t			buffer;
-
 	if (ft_death_philo(arg.philo) == PHILO_DETH)
 		return (PHILO_DETH);
-	gettimeofday(&tv, NULL);
-	buffer = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	printf("%zu %d %s\n", buffer, arg.pos, prompt);
+	printf("%zu %d %s\n", ft_get_timestamp(), arg.pos + 1, prompt);
 	return (0);
 }
