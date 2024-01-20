@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 23:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/19 23:17:22 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/20 14:50:03 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_philo_death(t_arg_routine arg)
 {
 	ft_prompt_death(arg);
 	pthread_mutex_lock(&arg.philo->mutex_dead);
-	arg.philo->philo_has_dead = 1;
+	arg.philo->philo_has_died = 1;
 	pthread_mutex_unlock(&arg.philo->mutex_dead);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/20 13:56:24 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/20 14:55:53 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_philo
 	int				eat;
 	int				sleep;
 	int				count_eat;	
-	int				philo_has_dead;
+	int				philo_has_died;
 	pthread_mutex_t	mutex_dead;
 	pthread_t		*thread;
 	t_philo_brain	*brain;
@@ -66,13 +66,13 @@ void	*ft_routine(void *arg);
 int		ft_parser(int argc, char **argv, t_philo *philo);
 int		ft_philo(t_philo *philo);
 int		ft_make_philo(t_philo *philo);
-int		ft_print_info(t_arg_routine arg, char *prompt, int checker);
+int		ft_print_info(t_arg_routine arg, char *prompt);
 int		ft_prompt_take_fork(t_arg_routine arg);
 int		ft_prompt_eat(t_arg_routine arg);
 int		ft_prompt_sleep(t_arg_routine arg);
 int		ft_prompt_think(t_arg_routine arg);
 int		ft_prompt_death(t_arg_routine arg);
 
-int	ft_death_philo(t_philo *philo);
+int		ft_death_philo(t_philo *philo);
 
 #endif
