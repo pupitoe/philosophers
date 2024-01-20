@@ -13,7 +13,7 @@ HEADER = philo.h
 
 NAME = philo
 
-CFLAGS = -Wall -Wextra -Werror -g3 #-pthread -fsanitize=thread 
+CFLAGS = -Wall -Wextra -Werror -g3 #-pthread -fsanitize=thread
 CC = cc
 
 all: $(NAME)
