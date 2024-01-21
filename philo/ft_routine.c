@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 23:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/20 22:27:57 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/21 19:03:57 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_change_time(t_arg_routine arg)
 {
-	pthread_mutex_lock(&arg.philo->mutex_dead);
+	pthread_mutex_lock(arg.brain->mutex_time);
 	arg.brain->time_left = ft_get_timestamp();
-	pthread_mutex_unlock(&arg.philo->mutex_dead);
+	pthread_mutex_unlock(arg.brain->mutex_time);
 }
 
 void	ft_philo_death(t_arg_routine arg)
@@ -83,7 +83,7 @@ void	*ft_routine(void *arg_v)
 	arg = *(t_arg_routine *)arg_v;
 	buffer = PHILO_LIFE;
 	round = 0;
-	arg.brain->time_left = ft_get_timestamp();
+	//arg.brain->time_left = ft_get_timestamp();
 	while (buffer == PHILO_LIFE)
 	{
 		round++;

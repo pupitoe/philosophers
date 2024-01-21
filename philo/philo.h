@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/20 22:18:44 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/21 14:46:50 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo_brain
 	int				*fork_right;
 	pthread_mutex_t	*mutex_left;
 	pthread_mutex_t	*mutex_right;
+	pthread_mutex_t	*mutex_time;
 	size_t			time_left;
 	int				count_eat;
 }				t_philo_brain;

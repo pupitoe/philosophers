@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:56:55 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/19 16:29:21 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/21 14:51:13 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,20 @@ static int	ft_make_mutex(t_philo *philo)
 	pthread_mutex_t	*mutexs;
 	int				i;
 
-	mutexs = malloc(philo->philos * sizeof(pthread_mutex_t));
+	mutexs = malloc((philo->philos * 2) * sizeof(pthread_mutex_t));
 	if (mutexs == NULL)
 		return (MALLOC_FAIL);
 	i = 0;
 	while (i < philo->philos)
 	{
 		pthread_mutex_init(mutexs + i, NULL);
+		pthread_mutex_init(mutexs + philo->philos + i, NULL);
 		if (i == 0)
 			philo->brain[i].mutex_left = mutexs + philo->philos - 1;
 		else
 			philo->brain[i].mutex_left = mutexs + i - 1;
 		philo->brain[i].mutex_right = mutexs + i;
+		philo->brain[i].mutex_time = mutexs + philo->philos + i;
 		i++;
 	}
 	if (philo->philos == 1)

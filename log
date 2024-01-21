@@ -1,0 +1,59 @@
+th push 0
+th push 2
+1705859936096 1 is thinking
+th push 1
+th push 3
+1705859936096 1 has taken a fork
+1705859936097 1 has taken a fork
+th push 4
+th push 6
+1705859936097 1 is eating
+1705859936097 4 is thinking
+th push 5
+th push 7
+1705859936097 4 has taken a fork
+1705859936097 4 has taken a fork
+th push 8
+1705859936097 4 is eating
+th push 9
+1705859936097 7 is thinking
+1705859936098 7 has taken a fork
+1705859936098 7 has taken a fork
+1705859936098 7 is eating
+1705859936098 2 is thinking
+1705859936098 2 has taken a fork
+1705859936098 9 is thinking
+1705859936099 9 has taken a fork
+1705859936099 9 has taken a fork
+1705859936099 9 is eating
+1705859936099 8 is thinking
+1705859936099 5 is thinking
+1705859936099 5 has taken a fork
+1705859936100 10 is thinking
+1705859936100 6 is thinking
+1705859936100 3 is thinking
+1705859936297 1 is sleeping
+1705859936297 10 has taken a fork
+1705859936297 2 has taken a fork
+1705859936297 2 is eating
+1705859936298 4 is sleeping
+1705859936298 3 has taken a fork
+1705859936298 5 has taken a fork
+1705859936298 5 is eating
+1705859936298 7 is sleeping
+1705859936298 6 has taken a fork
+1705859936299 9 is sleeping
+1705859936299 10 has taken a fork
+1705859936299 10 is eating
+1705859936300 8 has taken a fork
+1705859936300 8 has taken a fork
+1705859936300 8 is eating
+1705859936397 1 is thinking
+1705859936398 4 is thinking
+1705859936398 7 is thinking
+1705859936399 9 is thinking
+1705859936498 2 is sleeping
+1705859936498 3 has taken a fork
+1705859936498 3 is eating
+1705859936498 1 has taken a fork
+1705859936498 3 died
