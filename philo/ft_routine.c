@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 23:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/21 19:03:57 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/22 01:05:49 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,31 @@ int	ft_tea_time(t_arg_routine arg, size_t time)
 static int	ft_take_fork(t_arg_routine arg)
 {
 	int	buffer;
+	size_t	buffer_time;
 
 	buffer = PHILO_LIFE;
 	pthread_mutex_lock(arg.brain->mutex_right);
 	ft_prompt_take_fork(arg);
+	if (ft_death_philo(arg.philo) == PHILO_DETH)
+		return (pthread_mutex_unlock(arg.brain->mutex_right), PHILO_LIFE);
 	pthread_mutex_lock(arg.brain->mutex_left);
+	if (ft_death_philo(arg.philo) == PHILO_DETH)
+		return (pthread_mutex_unlock(arg.brain->mutex_left), pthread_mutex_unlock(arg.brain->mutex_right), PHILO_LIFE);
+	buffer_time = ft_get_timestamp() - philo_time_left(arg) + arg.philo->eat;
+	if (buffer_time > (size_t)arg.philo->death)
+	{
+		buffer_time = buffer_time - arg.philo->death;
+		if (buffer_time > (size_t)arg.philo->death)
+			buffer_time = 0;
+		buffer = PHILO_DETH;
+	}
+	else 
+		buffer_time = arg.philo->eat;
 	ft_prompt_take_fork(arg);
 	*(arg.brain->fork_left) = 1;
 	*(arg.brain->fork_right) = 1;
 	ft_prompt_eat(arg);
-	usleep(arg.philo->eat * 1000);
+	usleep(buffer_time * 1000);
 	//ft_tea_time(arg, srg.philo->eat * 1000);
 	*(arg.brain->fork_left) = 0;
 	*(arg.brain->fork_right) = 0;
@@ -91,7 +106,13 @@ void	*ft_routine(void *arg_v)
 		buffer = ft_take_fork(arg);
 		if (buffer == PHILO_LIFE)
 			buffer = ft_philo_eat(arg);
-		buffer = ft_death_philo(arg.philo);
+		if (buffer == PHILO_DETH)
+		{
+			ft_prompt_death(arg);
+			ft_philo_death(arg);
+		}
+		else
+			buffer = ft_death_philo(arg.philo);
 	}
 	return (arg_v);
 }

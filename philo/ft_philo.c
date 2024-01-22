@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/21 19:57:25 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/22 01:06:51 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int	ft_philo(t_philo *philo)
 		return (MALLOC_FAIL);
 	if (ft_make_thread(philo, arg) == ERR_THREAD_FAIL)
 		return (free(arg), ERR_THREAD_FAIL);
-	ft_check_death(philo, arg); // <- datarace + fonctoionne pas bien ou le rest jsp;
+	ft_check_death(philo, arg); // <- datarace  fonctoionne pas bien ou le rest jsp;
 	if (ft_join_thread(philo) == ERR_JOIN_FAIL)
 		return (free(arg), ERR_JOIN_FAIL);
 	free(arg);
