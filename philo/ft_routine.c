@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 23:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/22 14:28:56 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:47:22 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,10 @@ void	*ft_routine(void *arg_v)
 	arg = *(t_arg_routine *)arg_v;
 	buffer = PHILO_LIFE;
 	round = 0;
-	ft_print_info(arg, "philo push");
 	//arg.brain->time_left = ft_get_timestamp();
 	//return (arg_v);
 	while (buffer == PHILO_LIFE)
 	{
-		round++;
 		ft_prompt_think(arg);
 		buffer = ft_take_fork(arg);
 		if (buffer == PHILO_LIFE)
@@ -115,6 +113,11 @@ void	*ft_routine(void *arg_v)
 		}
 		else
 			buffer = ft_death_philo(arg.philo);
+		if (arg.philo->count_eat != -1 && ++round == arg.philo->count_eat)
+		{
+			ft_death_philo(arg.philo);
+			buffer = ROUND_REST;
+		}
 	}
 	return (arg_v);
 }
