@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/22 01:06:51 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:28:33 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,17 @@ static int	ft_make_thread(t_philo *philo, t_arg_routine *arg)
 		//printf("th push %d\n", i);
 		if (ft_make_thread_content(philo, arg, i) != 0)
 			return (ERR_THREAD_FAIL);
-		if (i + 2 < philo->philos)
-		{
-			if (ft_make_thread_content(philo, arg, i + 2) != 0)
-				return (ERR_THREAD_FAIL);
-			//printf("th push %d\n", i + 2);
-		}
-		//usleep(50);
-		i = i + 1 + (i % 2) * 2;
+		//if (i + 2 < philo->philos)
+		//{
+		//	if (ft_make_thread_content(philo, arg, i + 2) != 0)
+		//		return (ERR_THREAD_FAIL);
+		//	//printf("th push %d\n", i + 2);
+		//}
+
+		i += 2;
+		if (i >= philo->philos && i % 2 == 0)
+			i = 1;
+		usleep(10);
 	}
 	return (0);
 }

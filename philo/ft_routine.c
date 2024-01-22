@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 23:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/22 01:05:49 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:28:56 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,20 @@ static int	ft_take_fork(t_arg_routine arg)
 	buffer = PHILO_LIFE;
 	pthread_mutex_lock(arg.brain->mutex_right);
 	ft_prompt_take_fork(arg);
-	if (ft_death_philo(arg.philo) == PHILO_DETH)
-		return (pthread_mutex_unlock(arg.brain->mutex_right), PHILO_LIFE);
+	//if (ft_death_philo(arg.philo) == PHILO_DETH)
+	//	return (pthread_mutex_unlock(arg.brain->mutex_right), PHILO_LIFE);
 	pthread_mutex_lock(arg.brain->mutex_left);
-	if (ft_death_philo(arg.philo) == PHILO_DETH)
-		return (pthread_mutex_unlock(arg.brain->mutex_left), pthread_mutex_unlock(arg.brain->mutex_right), PHILO_LIFE);
-	buffer_time = ft_get_timestamp() - philo_time_left(arg) + arg.philo->eat;
-	if (buffer_time > (size_t)arg.philo->death)
-	{
-		buffer_time = buffer_time - arg.philo->death;
-		if (buffer_time > (size_t)arg.philo->death)
-			buffer_time = 0;
-		buffer = PHILO_DETH;
-	}
-	else 
+	//if (ft_death_philo(arg.philo) == PHILO_DETH)
+	//	return (pthread_mutex_unlock(arg.brain->mutex_left), pthread_mutex_unlock(arg.brain->mutex_right), PHILO_LIFE);
+	//buffer_time = ft_get_timestamp() - philo_time_left(arg) + arg.philo->eat;
+	//if (buffer_time > (size_t)arg.philo->death)
+	//{
+	//	buffer_time = buffer_time - arg.philo->death;
+	//	if (buffer_time > (size_t)arg.philo->death)
+	//		buffer_time = 0;
+	//	buffer = PHILO_DETH;
+	//}
+	//else 
 		buffer_time = arg.philo->eat;
 	ft_prompt_take_fork(arg);
 	*(arg.brain->fork_left) = 1;
@@ -98,7 +98,9 @@ void	*ft_routine(void *arg_v)
 	arg = *(t_arg_routine *)arg_v;
 	buffer = PHILO_LIFE;
 	round = 0;
+	ft_print_info(arg, "philo push");
 	//arg.brain->time_left = ft_get_timestamp();
+	//return (arg_v);
 	while (buffer == PHILO_LIFE)
 	{
 		round++;

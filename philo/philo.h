@@ -6,20 +6,20 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/22 00:49:44 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:05:54 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
-# define PARS_SUCCES 0
-# define PARS_FAIL -1
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
+# define PARS_SUCCES 0
+# define PARS_FAIL -1
 # define MALLOC_FAIL -12
 # define ERR_THREAD_FAIL -1
 # define ERR_JOIN_FAIL -1
