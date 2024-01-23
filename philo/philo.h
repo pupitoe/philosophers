@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/22 14:05:54 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:22:10 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ size_t	ft_get_timestamp(void);
 int		ft_death_philo(t_philo *philo);
 
 // to set the death
-void	ft_philo_death(t_arg_routine arg);
+void	ft_philo_death(t_arg_routine arg, int print);
 size_t	philo_time_left(t_arg_routine arg);
 
 #endif

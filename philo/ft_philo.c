@@ -6,45 +6,34 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/22 14:28:33 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/23 21:09:08 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	ft_make_thread_content(t_philo *philo, t_arg_routine *arg, int i)
-{
-	arg[i].pos = i;
-	arg[i].philo = philo;
-	arg[i].brain = philo->brain + i;
-	arg[i].brain->time_left = ft_get_timestamp();
-	if (pthread_create((philo->thread + i), NULL,
-			&ft_routine, arg + i) != 0)
-		return (ERR_THREAD_FAIL);
-	return (0);
-}
-
 static int	ft_make_thread(t_philo *philo, t_arg_routine *arg)
 {
 	int	i;
+	size_t	times_tamp;
 
 	i = 0;
 	while (i < philo->philos)
 	{
-		//printf("th push %d\n", i);
-		if (ft_make_thread_content(philo, arg, i) != 0)
+		arg[i].pos = i;
+		arg[i].philo = philo;
+		arg[i].brain = philo->brain + i;
+		i++;
+	}
+	i = 0;	
+	times_tamp = ft_get_timestamp();
+	while (i < philo->philos)
+	{
+		arg[i].brain->time_left = times_tamp;
+		if (pthread_create((philo->thread + i), NULL,
+				&ft_routine, arg + i) != 0)
 			return (ERR_THREAD_FAIL);
-		//if (i + 2 < philo->philos)
-		//{
-		//	if (ft_make_thread_content(philo, arg, i + 2) != 0)
-		//		return (ERR_THREAD_FAIL);
-		//	//printf("th push %d\n", i + 2);
-		//}
-
-		i += 2;
-		if (i >= philo->philos && i % 2 == 0)
-			i = 1;
-		usleep(10);
+		i++;
 	}
 	return (0);
 }
@@ -58,14 +47,7 @@ static int	ft_join_thread(t_philo *philo)
 	{
 		if (pthread_join(philo->thread[i], NULL) != 0)
 			return (ERR_JOIN_FAIL);
-		//printf("End of philo\n");
-		if (i + 2 < philo->philos)
-		{
-			if (pthread_join(philo->thread[i + 2], NULL) != 0)
-				return (ERR_JOIN_FAIL);
-			//printf("End of philo\n");
-		}
-		i = i + 1 + (i % 2) * 2;
+		i++;
 	}
 	return (0);
 }
@@ -103,15 +85,13 @@ void	ft_check_death(t_philo *philo, t_arg_routine *arg)
 		{
 			buffer = ft_death_philo(philo);
 			time_temps = ft_get_timestamp();
-			//printf("auwu\n");
 		}
 		if (buffer == PHILO_DETH)
 			exit(12);
-		//if (arg[i].brain->time_left < time_temps && arg[i].brain->time_left - time_temps <= (size_t)philo->death)
 		philo_left = philo_time_left(arg[i]);
 		if (time_temps > philo_left && time_temps - philo_left > (size_t)philo->death)
 		{
-			ft_philo_death(*(arg + i));
+			ft_philo_death(*(arg + i), 1);
 			buffer = PHILO_DETH;
 		}
 		i = (i + 1) % philo->philos;

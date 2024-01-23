@@ -26,7 +26,6 @@ int	ft_death_philo(t_philo *philo)
 
 	buffer = PHILO_LIFE;
 	pthread_mutex_lock(&philo->mutex_dead);
-	//usleep(100);
 	if (philo->philo_has_died)
 		buffer = PHILO_DETH;
 	pthread_mutex_unlock(&philo->mutex_dead);

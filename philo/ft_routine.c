@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 23:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/22 19:47:22 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/23 21:19:39 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void	ft_change_time(t_arg_routine arg)
 	pthread_mutex_unlock(arg.brain->mutex_time);
 }
 
-void	ft_philo_death(t_arg_routine arg)
+void	ft_philo_death(t_arg_routine arg, int print)
 {
-	ft_prompt_death(arg);
+	if (print)
+		ft_prompt_death(arg);
 	pthread_mutex_lock(&arg.philo->mutex_dead);
 	arg.philo->philo_has_died = 1;
 	pthread_mutex_unlock(&arg.philo->mutex_dead);
@@ -61,8 +62,9 @@ static int	ft_take_fork(t_arg_routine arg)
 	//buffer_time = ft_get_timestamp() - philo_time_left(arg) + arg.philo->eat;
 	//if (buffer_time > (size_t)arg.philo->death)
 	//{
-	//	buffer_time = buffer_time - arg.philo->death;
-	//	if (buffer_time > (size_t)arg.philo->death)
+	//	printf("zu : %zu\n", buffer_time);
+	//	//buffer_time = buffer_time - arg.philo->death;
+	//	//if (buffer_time > (size_t)arg.philo->death)
 	//		buffer_time = 0;
 	//	buffer = PHILO_DETH;
 	//}
@@ -73,7 +75,6 @@ static int	ft_take_fork(t_arg_routine arg)
 	*(arg.brain->fork_right) = 1;
 	ft_prompt_eat(arg);
 	usleep(buffer_time * 1000);
-	//ft_tea_time(arg, srg.philo->eat * 1000);
 	*(arg.brain->fork_left) = 0;
 	*(arg.brain->fork_right) = 0;
 	pthread_mutex_unlock(arg.brain->mutex_left);
@@ -98,19 +99,16 @@ void	*ft_routine(void *arg_v)
 	arg = *(t_arg_routine *)arg_v;
 	buffer = PHILO_LIFE;
 	round = 0;
-	//arg.brain->time_left = ft_get_timestamp();
-	//return (arg_v);
-	while (buffer == PHILO_LIFE)
+	if (arg.pos % 2)
+		usleep(600);
+	ft_print_info(arg, "was life");
+	while (buffer == PHILO_LIFE && arg.philo->count_eat)
 	{
-		ft_prompt_think(arg);
 		buffer = ft_take_fork(arg);
 		if (buffer == PHILO_LIFE)
 			buffer = ft_philo_eat(arg);
 		if (buffer == PHILO_DETH)
-		{
-			ft_prompt_death(arg);
-			ft_philo_death(arg);
-		}
+			ft_philo_death(arg, 1);
 		else
 			buffer = ft_death_philo(arg.philo);
 		if (arg.philo->count_eat != -1 && ++round == arg.philo->count_eat)
@@ -118,6 +116,7 @@ void	*ft_routine(void *arg_v)
 			ft_death_philo(arg.philo);
 			buffer = ROUND_REST;
 		}
+		ft_prompt_think(arg);
 	}
 	return (arg_v);
 }
