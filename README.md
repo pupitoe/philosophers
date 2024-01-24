@@ -8,4 +8,4 @@ pas oublier que les philosoph commence a 1
 
 faire le 1 philo
 regler les probleme avec les mutex lock
-enlever les fork
+gerer le print avec un mutex pour les avoirs dans le bonne ordre (c'est surtout pour que le message de mort soit le dernier)

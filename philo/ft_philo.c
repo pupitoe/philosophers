@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/24 02:00:51 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/24 02:10:15 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_check_death(t_philo *philo, t_arg_routine *arg)
 
 	i = 0;
 	buffer = PHILO_LIFE;
-	while (buffer != PHILO_DETH)
+	while (buffer != PHILO_DETH && philo->count_eat)
 	{
 		if (i == 0)
 		{
