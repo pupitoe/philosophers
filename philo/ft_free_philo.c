@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:26:48 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/21 15:16:00 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/24 01:52:18 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_delet_mutex(t_philo *philo)
 	int	all_mutex;
 
 	i = 0;
-	all_mutex = philo->philos * 2;	
+	all_mutex = philo->philos * 2;
 	while (i < all_mutex)
 	{
 		pthread_mutex_destroy(philo->mutex + i);

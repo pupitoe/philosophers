@@ -6,14 +6,15 @@ SOURCES = 	main.c \
 			ft_routine.c \
 			ft_free_philo.c \
 			ft_prompt.c \
-			ft_prompt2.c
+			ft_prompt2.c \
+			ft_death.c
 
 OBJS = $(SOURCES:.c=.o)
 HEADER = philo.h
 
 NAME = philo
 
-CFLAGS = -Wall -Wextra -Werror -g3 -pthread -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g3 -pthread #-fsanitize=thread
 CC = cc
 
 all: $(NAME)

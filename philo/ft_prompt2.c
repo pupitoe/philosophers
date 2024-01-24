@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 21:15:31 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/21 19:08:14by tlassere         ###   ########.fr       */
+/*   Created: 2024/01/24 01:52:06 by tlassere          #+#    #+#             */
+/*   Updated: 2024/01/24 01:56:41 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,6 @@ size_t	ft_get_timestamp(void)
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
-}
-
-int	ft_death_philo(t_philo *philo)
-{
-	int	buffer;
-
-	buffer = PHILO_LIFE;
-	pthread_mutex_lock(&philo->mutex_dead);
-	if (philo->philo_has_died)
-		buffer = PHILO_DETH;
-	pthread_mutex_unlock(&philo->mutex_dead);
-	return (buffer);
 }
 
 int	ft_print_info(t_arg_routine arg, char *prompt)

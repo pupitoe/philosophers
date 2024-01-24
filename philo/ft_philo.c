@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/23 21:09:08 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/24 02:00:51 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_make_thread(t_philo *philo, t_arg_routine *arg)
 {
-	int	i;
+	int		i;
 	size_t	times_tamp;
 
 	i = 0;
@@ -25,7 +25,7 @@ static int	ft_make_thread(t_philo *philo, t_arg_routine *arg)
 		arg[i].brain = philo->brain + i;
 		i++;
 	}
-	i = 0;	
+	i = 0;
 	times_tamp = ft_get_timestamp();
 	while (i < philo->philos)
 	{
@@ -60,20 +60,10 @@ static int	ft_make_arg(t_arg_routine **arg, t_philo *philo)
 	return (0);
 }
 
-size_t	philo_time_left(t_arg_routine arg)
-{
-	size_t	buffer;
-
-	pthread_mutex_lock(arg.brain->mutex_time);
-	buffer = arg.brain->time_left;
-	pthread_mutex_unlock(arg.brain->mutex_time);
-	return (buffer);
-}
-
 void	ft_check_death(t_philo *philo, t_arg_routine *arg)
 {
-	int	i;
-	int	buffer;
+	int		i;
+	int		buffer;
 	size_t	time_temps;
 	size_t	philo_left;
 
@@ -86,10 +76,9 @@ void	ft_check_death(t_philo *philo, t_arg_routine *arg)
 			buffer = ft_death_philo(philo);
 			time_temps = ft_get_timestamp();
 		}
-		if (buffer == PHILO_DETH)
-			exit(12);
 		philo_left = philo_time_left(arg[i]);
-		if (time_temps > philo_left && time_temps - philo_left > (size_t)philo->death)
+		if (time_temps > philo_left
+			&& time_temps - philo_left > (size_t)philo->death)
 		{
 			ft_philo_death(*(arg + i), 1);
 			buffer = PHILO_DETH;
@@ -109,7 +98,7 @@ int	ft_philo(t_philo *philo)
 		return (MALLOC_FAIL);
 	if (ft_make_thread(philo, arg) == ERR_THREAD_FAIL)
 		return (free(arg), ERR_THREAD_FAIL);
-	ft_check_death(philo, arg); // <- datarace  fonctoionne pas bien ou le rest jsp;
+	ft_check_death(philo, arg);
 	if (ft_join_thread(philo) == ERR_JOIN_FAIL)
 		return (free(arg), ERR_JOIN_FAIL);
 	free(arg);
