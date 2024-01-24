@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 23:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/24 02:08:40 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:48:11 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,29 @@ void	ft_change_time(t_arg_routine arg)
 
 static int	ft_take_fork(t_arg_routine arg)
 {
-	pthread_mutex_lock(arg.brain->mutex_right);
+	if (arg.pos % 2)
+		pthread_mutex_lock(arg.brain->mutex_right);
+	else
+		pthread_mutex_lock(arg.brain->mutex_left);
 	ft_prompt_take_fork(arg);
-	if (ft_death_philo(arg.philo) == PHILO_DETH)
-		return (pthread_mutex_unlock(arg.brain->mutex_right), PHILO_DETH);
-	pthread_mutex_lock(arg.brain->mutex_left);
-	if (ft_death_philo(arg.philo) == PHILO_DETH)
-		return (pthread_mutex_unlock(arg.brain->mutex_left),
-			pthread_mutex_unlock(arg.brain->mutex_right), PHILO_DETH);
-	ft_prompt_take_fork(arg);
-	ft_prompt_eat(arg);
-	usleep(arg.philo->eat * 1000);
-	pthread_mutex_unlock(arg.brain->mutex_left);
-	pthread_mutex_unlock(arg.brain->mutex_right);
+	if (arg.pos % 2)
+		pthread_mutex_lock(arg.brain->mutex_left);
+	else
+		pthread_mutex_lock(arg.brain->mutex_right);
+	if (ft_death_philo(arg.philo) == PHILO_LIFE)
+	{
+		ft_prompt_take_fork(arg);
+		ft_prompt_eat(arg);
+		usleep(arg.philo->eat * 1000);
+	}
+	if (arg.pos % 2)
+		pthread_mutex_unlock(arg.brain->mutex_right);
+	else
+		pthread_mutex_unlock(arg.brain->mutex_left);
+	if (arg.pos % 2)
+		pthread_mutex_unlock(arg.brain->mutex_left);
+	else
+		pthread_mutex_unlock(arg.brain->mutex_right);
 	ft_change_time(arg);
 	return (PHILO_LIFE);
 }
