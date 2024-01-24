@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/24 18:17:40 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:43:49 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_arg_routine
 
 void	ft_free_philo(t_philo *philos);
 void	ft_print_exemple(void);
+void	ft_philo_death(t_arg_routine arg, int print);
 void	*ft_routine(void *arg);
 
 int		ft_parser(int argc, char **argv, t_philo *philo);
@@ -71,13 +72,9 @@ int		ft_prompt_eat(t_arg_routine arg);
 int		ft_prompt_sleep(t_arg_routine arg);
 int		ft_prompt_think(t_arg_routine arg);
 int		ft_prompt_death(t_arg_routine arg);
-size_t	ft_get_timestamp(void);
-
-// to find out if someone has died
 int		ft_death_philo(t_philo *philo);
 
-// to set the death
-void	ft_philo_death(t_arg_routine arg, int print);
+size_t	ft_get_timestamp(void);
 size_t	philo_time_left(t_arg_routine arg);
 
 #endif
