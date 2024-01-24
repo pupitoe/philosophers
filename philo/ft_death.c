@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 01:54:02 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/24 01:55:39 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:31:39 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,11 @@ int	ft_death_philo(t_philo *philo)
 		buffer = PHILO_DETH;
 	pthread_mutex_unlock(&philo->mutex_dead);
 	return (buffer);
+}
+
+void	ft_change_time(t_arg_routine arg)
+{
+	pthread_mutex_lock(arg.brain->mutex_time);
+	arg.brain->time_left = ft_get_timestamp();
+	pthread_mutex_unlock(arg.brain->mutex_time);
 }

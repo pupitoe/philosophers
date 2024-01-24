@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:45:13 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/24 01:36:38 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:21:04 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	main(int argc, char **argv)
 	memset(&philo, 0, sizeof(t_philo));
 	if (ft_parser(argc, argv, &philo) == PARS_FAIL)
 		return (printf("Error parsing !\n"), 0);
-	ft_philo(&philo);
-	ft_free_philo(&philo);
+	if (philo.philos)
+	{
+		ft_philo(&philo);
+		ft_free_philo(&philo);
+	}
 	return (0);
 }
