@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/24 02:02:09 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:17:40 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_philo
 	int				count_eat;	
 	int				philo_has_died;
 	pthread_mutex_t	mutex_dead;
+	pthread_mutex_t	mutex_talk;
 	pthread_t		*thread;
 	t_philo_brain	*brain;
 	pthread_mutex_t	*mutex;

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/24 02:10:15 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:39:32 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_check_death(t_philo *philo, t_arg_routine *arg)
 {
 	int		i;
 	int		buffer;
-	size_t	time_temps;
+	size_t	times_tamp;
 	size_t	philo_left;
 
 	i = 0;
@@ -74,11 +74,11 @@ void	ft_check_death(t_philo *philo, t_arg_routine *arg)
 		if (i == 0)
 		{
 			buffer = ft_death_philo(philo);
-			time_temps = ft_get_timestamp();
+			times_tamp = ft_get_timestamp();
 		}
 		philo_left = philo_time_left(arg[i]);
-		if (time_temps > philo_left
-			&& time_temps - philo_left > (size_t)philo->death)
+		if (times_tamp > philo_left
+			&& times_tamp - philo_left > (size_t)philo->death)
 		{
 			ft_philo_death(*(arg + i), 1);
 			buffer = PHILO_DETH;

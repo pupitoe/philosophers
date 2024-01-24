@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:56:55 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/24 02:02:56 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:17:58 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static int	ft_make_mutex(t_philo *philo)
 	if (philo->philos == 1)
 		philo->brain[i].mutex_left = NULL;
 	pthread_mutex_init(&philo->mutex_dead, NULL);
+	pthread_mutex_init(&philo->mutex_talk, NULL);
 	philo->mutex = mutexs;
 	return (0);
 }
