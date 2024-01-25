@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/24 18:42:55 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:52:57 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ static int	ft_make_thread(t_philo *philo, t_arg_routine *arg)
 		arg[i].brain->time_left = times_tamp;
 		if (pthread_create((philo->thread + i), NULL,
 				&ft_routine, arg + i) != 0)
-			return (ERR_THREAD_FAIL);
+			return (i);
 		i++;
 	}
-	return (0);
+	return (i);
 }
 
-static int	ft_join_thread(t_philo *philo)
+static int	ft_join_thread(t_philo *philo, int philos_creat)
 {
 	int	i;
 
 	i = 0;
-	while (i < philo->philos)
+	while (i < philos_creat)
 	{
 		if (pthread_join(philo->thread[i], NULL) != 0)
 			return (ERR_JOIN_FAIL);
@@ -60,46 +60,29 @@ static int	ft_make_arg(t_arg_routine **arg, t_philo *philo)
 	return (0);
 }
 
-void	ft_check_death(t_philo *philo, t_arg_routine *arg)
+static int	ft_good_philos(t_philo *philo, int philos_creat,
+		t_arg_routine *rountin)
 {
-	int		i;
-	int		buffer;
-	size_t	times_tamp;
-	size_t	philo_left;
-
-	i = 0;
-	buffer = PHILO_LIFE;
-	while (buffer != PHILO_DETH && philo->count_eat)
-	{
-		if (i == 0)
-		{
-			buffer = ft_death_philo(philo);
-			times_tamp = ft_get_timestamp();
-		}
-		philo_left = philo_time_left(arg[i]);
-		if (times_tamp > philo_left
-			&& times_tamp - philo_left > (size_t)philo->death)
-		{
-			ft_philo_death(*(arg + i), 1);
-			buffer = PHILO_DETH;
-		}
-		i = (i + 1) % philo->philos;
-		usleep(200);
-	}
+	if (philos_creat == philo->philos)
+		return (1);
+	if (philos_creat != 0)
+		ft_philo_death(*(rountin), 0);
+	return (0);
 }
 
 int	ft_philo(t_philo *philo)
 {
 	t_arg_routine	*arg;
+	int				philos_creat;
 
 	if (ft_make_philo(philo) == MALLOC_FAIL)
 		return (MALLOC_FAIL);
 	if (ft_make_arg(&arg, philo) == MALLOC_FAIL)
 		return (MALLOC_FAIL);
-	if (ft_make_thread(philo, arg) == ERR_THREAD_FAIL)
-		return (free(arg), ERR_THREAD_FAIL);
-	ft_check_death(philo, arg);
-	if (ft_join_thread(philo) == ERR_JOIN_FAIL)
+	philos_creat = ft_make_thread(philo, arg);
+	if (ft_good_philos(philo, philos_creat, arg))
+		ft_check_death(philo, arg);
+	if (ft_join_thread(philo, philos_creat) == ERR_JOIN_FAIL)
 		return (free(arg), ERR_JOIN_FAIL);
 	free(arg);
 	return (0);
