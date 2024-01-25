@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 23:02:44 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/24 21:15:59 by tlassere         ###   ########.fr       */
+/*   Created: 2024/01/25 20:34:07 by tlassere          #+#    #+#             */
+/*   Updated: 2024/01/25 20:34:10 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,15 @@ void	*ft_routine(void *arg_v)
 		buffer = ft_one_philo(arg);
 	while (buffer == PHILO_LIFE && arg.philo->count_eat)
 	{
-		buffer = ft_take_fork(arg);
-		if (buffer == PHILO_LIFE && ft_death_philo(arg.philo) == PHILO_LIFE)
-			buffer = ft_philo_sleep(arg);
+		if (arg.philo->count_eat != -1)
+			arg.brain->count_eat += 1;
+		if (ft_death_philo(arg.philo) == PHILO_LIFE)
+			ft_take_fork(arg);
+		if (ft_death_philo(arg.philo) == PHILO_LIFE)
+			ft_philo_sleep(arg);
 		buffer = ft_death_philo(arg.philo);
-		if (arg.philo->count_eat != -1 && ++round == arg.philo->count_eat)
-		{
-			ft_philo_death(arg, 0);
-			buffer = ROUND_REST;
-		}
-		ft_prompt_think(arg);
+		if (buffer == PHILO_LIFE)
+			ft_prompt_think(arg);
 	}
 	return (arg_v);
 }
