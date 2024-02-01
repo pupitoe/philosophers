@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:56:55 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/24 22:15:44 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/01 20:52:42 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	ft_make_brain(t_philo *philo)
 	t_philo_brain	*philo_content;
 
 	philo_content = malloc((philo->philos) * sizeof(t_philo_brain));
-	memset(philo_content, 0, (philo->philos) * sizeof(t_philo_brain));
 	if (philo_content == NULL)
 		return (MALLOC_FAIL);
+	memset(philo_content, 0, (philo->philos) * sizeof(t_philo_brain));
 	philo->brain = philo_content;
 	return (0);
 }
