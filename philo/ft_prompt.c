@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:20:42 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/25 19:49:48 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:41:08 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int	ft_prompt_eat(t_arg_routine arg)
 {
 	pthread_mutex_lock(&arg.philo->mutex_talk);
 	ft_print_info(arg, "is eating");
-	if (arg.brain->count_eat == arg.philo->count_eat)
-		ft_philo_death(arg, 0);
+	ft_get_eat(arg.philo, arg.arg);
 	pthread_mutex_unlock(&arg.philo->mutex_talk);
 	return (0);
 }

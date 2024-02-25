@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/25 19:48:33 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:40:14 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define PHILO_DETH 69
 # define PHILO_LIFE 24
 # define ROUND_REST 42
+# define SUCCESS 0
+# define FAIL 1
 
 typedef struct s_philo_brain
 {
@@ -53,9 +55,10 @@ typedef struct s_philo
 
 typedef struct s_arg_routine
 {
-	int				pos;
-	t_philo_brain	*brain;
-	t_philo			*philo;
+	int						pos;
+	t_philo_brain			*brain;
+	t_philo					*philo;
+	struct s_arg_routine	*arg;
 }				t_arg_routine;
 
 void	ft_free_philo(t_philo *philos);
@@ -75,6 +78,7 @@ int		ft_prompt_sleep(t_arg_routine arg);
 int		ft_prompt_think(t_arg_routine arg);
 int		ft_prompt_death(t_arg_routine arg);
 int		ft_death_philo(t_philo *philo);
+int		ft_get_eat(t_philo *philo, t_arg_routine *arg);
 
 size_t	ft_get_timestamp(void);
 size_t	philo_time_left(t_arg_routine arg);

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/25 19:49:05 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:41:47 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	ft_make_thread(t_philo *philo, t_arg_routine *arg)
 		arg[i].philo = philo;
 		arg[i].brain = philo->brain + i;
 		arg[i].brain->count_eat = 0;
+		arg[i].arg = arg;
 		i++;
 	}
 	i = 0;
