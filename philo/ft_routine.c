@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 20:34:07 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/25 20:34:10 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:03:57 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,14 @@ static int	ft_philo_sleep(t_arg_routine arg)
 	return (PHILO_LIFE);
 }
 
+static void	ft_philo_count_eat(t_arg_routine arg)
+{
+	pthread_mutex_lock(arg.brain->mutex_time);
+	if (arg.philo->count_eat != -1)
+		arg.brain->count_eat += 1;
+	pthread_mutex_unlock(arg.brain->mutex_time);
+}
+
 void	*ft_routine(void *arg_v)
 {
 	t_arg_routine	arg;
@@ -77,12 +85,11 @@ void	*ft_routine(void *arg_v)
 		usleep(500);
 	if (arg.philo->philos == 1 && arg.philo->count_eat)
 		buffer = ft_one_philo(arg);
-	while (buffer == PHILO_LIFE && arg.philo->count_eat)
+	while (buffer == PHILO_LIFE)
 	{
-		if (arg.philo->count_eat != -1)
-			arg.brain->count_eat += 1;
 		if (ft_death_philo(arg.philo) == PHILO_LIFE)
 			ft_take_fork(arg);
+		ft_philo_count_eat(arg);
 		if (ft_death_philo(arg.philo) == PHILO_LIFE)
 			ft_philo_sleep(arg);
 		buffer = ft_death_philo(arg.philo);
