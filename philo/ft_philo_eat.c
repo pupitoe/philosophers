@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:10:53 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/25 15:13:13 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:45:19 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,7 @@ int	ft_get_eat(t_philo *philo, t_arg_routine *arg)
 			i++;
 		}
 		if (result == SUCCESS)
-		{
-			pthread_mutex_lock(&philo->mutex_talk);
 			ft_philo_death(*arg, 0);
-			pthread_mutex_unlock(&philo->mutex_talk);
-		}
 	}
 	else
 		result = FAIL;
