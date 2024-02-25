@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 20:34:07 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/25 15:47:14 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:59:03 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	ft_philo_sleep(t_arg_routine arg)
 	return (PHILO_LIFE);
 }
 
-static void	ft_philo_count_eat(t_arg_routine arg)
+void	ft_philo_count_eat(t_arg_routine arg)
 {
 	pthread_mutex_lock(arg.brain->mutex_time);
 	if (arg.philo->count_eat != -1)
@@ -87,7 +87,6 @@ void	*ft_routine(void *arg_v)
 		buffer = ft_one_philo(arg);
 	while (buffer == PHILO_LIFE && arg.philo->philos != 1)
 	{
-		ft_philo_count_eat(arg);
 		if (ft_death_philo(arg.philo) == PHILO_LIFE)
 			ft_take_fork(arg);
 		if (ft_death_philo(arg.philo) == PHILO_LIFE)

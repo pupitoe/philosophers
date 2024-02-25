@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/25 15:40:14 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:59:19 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ft_philo_death(t_arg_routine arg, int print);
 void	ft_change_time(t_arg_routine arg);
 void	*ft_routine(void *arg);
 void	ft_check_death(t_philo *philo, t_arg_routine *arg);
+void	ft_philo_count_eat(t_arg_routine arg);
 
 int		ft_parser(int argc, char **argv, t_philo *philo);
 int		ft_philo(t_philo *philo);
