@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 23:24:23 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/20 14:47:11 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:10:37 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ int	ft_parser(int argc, char **argv, t_philo *philo)
 		printf("The max number of philosophers is 1000\n");
 		return (PARS_FAIL);
 	}
-	return (PARS_SUCCES);
+	return (ft_parser_time(philo));
 }

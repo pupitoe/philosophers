@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/12 15:57:08 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:21:34 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define SUCCESS 0
 # define FAIL 1
 # define USLEEP_FAIL -1
+# define USLEEP_MAX_TIME 1000
 
 typedef struct s_philo_brain
 {
@@ -71,6 +72,7 @@ void	ft_check_death(t_philo *philo, t_arg_routine *arg);
 void	ft_philo_count_eat(t_arg_routine arg);
 
 int		ft_parser(int argc, char **argv, t_philo *philo);
+int		ft_parser_time(t_philo *philo);
 int		ft_philo(t_philo *philo);
 int		ft_make_philo(t_philo *philo);
 int		ft_print_info(t_arg_routine arg, char *prompt);
