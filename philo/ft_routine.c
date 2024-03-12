@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 20:34:07 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/25 15:59:03 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:38:51 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ void	*ft_routine(void *arg_v)
 		usleep(500);
 	if (arg.philo->philos == 1 && arg.philo->count_eat)
 		buffer = ft_one_philo(arg);
-	while (buffer == PHILO_LIFE && arg.philo->philos != 1)
+	while (buffer == PHILO_LIFE && arg.philo->philos != 1
+		&& arg.philo->count_eat)
 	{
 		if (ft_death_philo(arg.philo) == PHILO_LIFE)
 			ft_take_fork(arg);
