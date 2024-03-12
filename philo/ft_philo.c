@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/25 15:41:47 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:54:46 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	ft_make_arg(t_arg_routine **arg, t_philo *philo)
 	*arg = malloc(philo->philos * sizeof(t_arg_routine));
 	if (*arg == NULL)
 		return (MALLOC_FAIL);
-	return (0);
+	return (SUCCESS);
 }
 
 static int	ft_good_philos(t_philo *philo, int philos_creat,
