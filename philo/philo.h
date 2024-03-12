@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:27:32 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/12 19:39:04 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/12 21:52:51 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		ft_parser(int argc, char **argv, t_philo *philo);
 int		ft_parser_time(t_philo *philo);
 int		ft_philo(t_philo *philo);
 int		ft_make_philo(t_philo *philo);
+int		ft_make_mutex(t_philo *philo);
 int		ft_print_info(t_arg_routine arg, char *prompt);
 int		ft_prompt_take_fork(t_arg_routine arg);
 int		ft_prompt_eat(t_arg_routine arg);

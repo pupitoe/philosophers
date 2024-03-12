@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:56:55 by tlassere          #+#    #+#             */
-/*   Updated: 2024/02/01 20:52:42 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/12 21:51:52 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,6 @@ static int	ft_make_brain(t_philo *philo)
 		return (MALLOC_FAIL);
 	memset(philo_content, 0, (philo->philos) * sizeof(t_philo_brain));
 	philo->brain = philo_content;
-	return (0);
-}
-
-static int	ft_make_mutex(t_philo *philo)
-{
-	pthread_mutex_t	*mutexs;
-	int				i;
-
-	mutexs = malloc((philo->philos * 2) * sizeof(pthread_mutex_t));
-	if (mutexs == NULL)
-		return (MALLOC_FAIL);
-	i = 0;
-	while (i < philo->philos)
-	{
-		pthread_mutex_init(mutexs + i, NULL);
-		pthread_mutex_init(mutexs + philo->philos + i, NULL);
-		if (i == 0)
-			philo->brain[i].mutex_left = mutexs + philo->philos - 1;
-		else
-			philo->brain[i].mutex_left = mutexs + i - 1;
-		philo->brain[i].mutex_right = mutexs + i;
-		philo->brain[i].mutex_time = mutexs + philo->philos + i;
-		i++;
-	}
-	pthread_mutex_init(&philo->mutex_dead, NULL);
-	pthread_mutex_init(&philo->mutex_talk, NULL);
-	philo->mutex = mutexs;
 	return (0);
 }
 
