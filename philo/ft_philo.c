@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/12 15:54:46 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:57:57 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,27 +65,33 @@ static int	ft_make_arg(t_arg_routine **arg, t_philo *philo)
 static int	ft_good_philos(t_philo *philo, int philos_creat,
 		t_arg_routine *rountin)
 {
-	if (philos_creat == philo->philos)
-		return (1);
-	if (philos_creat != 0)
+	int	status;
+
+	status = SUCCESS;
+	if (philos_creat != philo->philos)
+	{
+		status = FAIL;
 		ft_philo_death(*(rountin), 0);
-	return (0);
+	}
+	return (status);
 }
 
 int	ft_philo(t_philo *philo)
 {
-	t_arg_routine	*arg;
+	int				status;
 	int				philos_creat;
+	t_arg_routine	*arg;
 
-	if (ft_make_philo(philo) == MALLOC_FAIL)
-		return (MALLOC_FAIL);
-	if (ft_make_arg(&arg, philo) == MALLOC_FAIL)
-		return (MALLOC_FAIL);
-	philos_creat = ft_make_thread(philo, arg);
-	if (ft_good_philos(philo, philos_creat, arg))
-		ft_check_death(philo, arg);
-	if (ft_join_thread(philo, philos_creat) == ERR_JOIN_FAIL)
-		return (free(arg), ERR_JOIN_FAIL);
-	free(arg);
-	return (0);
+	status = MALLOC_FAIL;
+	if (ft_make_philo(philo) == SUCCESS && ft_make_arg(&arg, philo) == SUCCESS)
+	{
+		status = SUCCESS;
+		philos_creat = ft_make_thread(philo, arg);
+		if (ft_good_philos(philo, philos_creat, arg) == SUCCESS)
+			ft_check_death(philo, arg);
+		if (ft_join_thread(philo, philos_creat) == ERR_JOIN_FAIL)
+			status = ERR_JOIN_FAIL;
+		free(arg);
+	}
+	return (status);
 }
