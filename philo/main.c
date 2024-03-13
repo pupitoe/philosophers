@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:45:13 by tlassere          #+#    #+#             */
-/*   Updated: 2024/01/24 21:21:04 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:26:09 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int	main(int argc, char **argv)
 		ft_philo(&philo);
 		ft_free_philo(&philo);
 	}
-	return (0);
+	return (SUCCESS);
 }
