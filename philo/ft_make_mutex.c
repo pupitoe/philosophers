@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:51:34 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/13 15:09:24 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:21:57 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	ft_make_mutex_loop(pthread_mutex_t *mutexs, int at)
 	return (status);
 }
 
-static int	ft_make_mutexs_static(t_philo *philo)
+static int	ft_make_mutexs_static(t_philo *philo, pthread_mutex_t *mutexs)
 {
 	int	status;
 
@@ -75,8 +75,8 @@ static int	ft_make_mutexs_static(t_philo *philo)
 	}
 	if (status == FAIL)
 	{
-		ft_make_mutex_loop_del(philo->mutex, philo->philos);
-		ft_make_mutex_loop_del(philo->mutex + philo->philos, philo->philos);
+		ft_make_mutex_loop_del(mutexs, philo->philos);
+		ft_make_mutex_loop_del(mutexs + philo->philos, philo->philos);
 	}
 	return (status);
 }
@@ -94,7 +94,7 @@ int	ft_make_mutex(t_philo *philo)
 		{
 			if (!(ft_make_mutex_loop(mutexs + philo->philos, philo->philos)))
 			{
-				if (ft_make_mutexs_static(philo) == SUCCESS)
+				if (ft_make_mutexs_static(philo, mutexs) == SUCCESS)
 				{
 					philo->mutex = mutexs;
 					ft_set_mutex(philo);
