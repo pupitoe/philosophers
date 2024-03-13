@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:51:34 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/12 21:58:23 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:09:24 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ static int	ft_make_mutexs_static(t_philo *philo)
 	status = SUCCESS;
 	if (pthread_mutex_init(&philo->mutex_dead, NULL) != 0)
 		status = FAIL;
-	if (pthread_mutex_init(&philo->mutex_talk, NULL) != 0)
+	if (status == SUCCESS
+		&& pthread_mutex_init(&philo->mutex_talk, NULL) != 0)
 	{
 		pthread_mutex_destroy(&philo->mutex_dead);
 		status = FAIL;
