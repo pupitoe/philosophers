@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:56:55 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/12 21:51:52 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:25:41 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_make_brain(t_philo *philo)
 		return (MALLOC_FAIL);
 	memset(philo_content, 0, (philo->philos) * sizeof(t_philo_brain));
 	philo->brain = philo_content;
-	return (0);
+	return (SUCCESS);
 }
 
 static int	ft_make_thread(t_philo *philo)
@@ -32,7 +32,7 @@ static int	ft_make_thread(t_philo *philo)
 	if (philo_th == NULL)
 		return (MALLOC_FAIL);
 	philo->thread = philo_th;
-	return (0);
+	return (SUCCESS);
 }
 
 int	ft_make_philo(t_philo *philo)
@@ -43,5 +43,5 @@ int	ft_make_philo(t_philo *philo)
 		return (MALLOC_FAIL);
 	if (ft_make_mutex(philo) == MALLOC_FAIL)
 		return (MALLOC_FAIL);
-	return (0);
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 22:19:20 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/12 19:57:57 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:27:22 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,17 @@ static int	ft_make_thread(t_philo *philo, t_arg_routine *arg)
 static int	ft_join_thread(t_philo *philo, int philos_creat)
 {
 	int	i;
+	int	status;
 
 	i = 0;
+	status = SUCCESS;
 	while (i < philos_creat)
 	{
 		if (pthread_join(philo->thread[i], NULL) != 0)
-			return (ERR_JOIN_FAIL);
+			status = ERR_JOIN_FAIL;
 		i++;
 	}
-	return (0);
+	return (status);
 }
 
 static int	ft_make_arg(t_arg_routine **arg, t_philo *philo)
