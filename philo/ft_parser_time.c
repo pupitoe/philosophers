@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:10:51 by tlassere          #+#    #+#             */
-/*   Updated: 2024/03/12 17:20:53 by tlassere         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:37:11 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ int	ft_parser_time(t_philo *philo)
 	if (philo->eat > USLEEP_MAX_TIME
 		|| philo->sleep > USLEEP_MAX_TIME
 		|| philo->death > USLEEP_MAX_TIME)
+	{
+		printf("the maximum time is 1000\n");
 		status = PARS_FAIL;
+	}
 	return (status);
 }
